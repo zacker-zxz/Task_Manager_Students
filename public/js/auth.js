@@ -36,22 +36,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const username = document.getElementById('login-user').value.trim();
         const password = document.getElementById('login-pass').value;
 
-        try {
-            const res = await fetch('/api/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password })
-            });
-            const data = await res.json();
-            if (!res.ok) { errEl.textContent = data.error; errEl.hidden = false; return; }
+        const users = JSON.parse(localStorage.getItem('nexus_users') || '[]');
+        const user = users.find(u => u.username.toLowerCase() === username.toLowerCase() && u.password === password);
 
-            localStorage.setItem('nexus_token', data.token);
-            localStorage.setItem('nexus_user', data.username);
-            window.location.href = '/dashboard.html';
-        } catch {
-            errEl.textContent = 'Server unreachable. Make sure the backend is running.';
-            errEl.hidden = false;
+        if (!user) { 
+            errEl.textContent = 'Invalid username or password.'; 
+            errEl.hidden = false; 
+            return; 
         }
+
+        localStorage.setItem('nexus_token', 'token-' + user.id);
+        localStorage.setItem('nexus_user', user.username);
+        window.location.href = '/dashboard.html';
     });
 
     // Register
@@ -63,21 +59,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const username = document.getElementById('reg-user').value.trim();
         const password = document.getElementById('reg-pass').value;
 
-        try {
-            const res = await fetch('/api/register', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password })
-            });
-            const data = await res.json();
-            if (!res.ok) { errEl.textContent = data.error; errEl.hidden = false; return; }
-
-            localStorage.setItem('nexus_token', data.token);
-            localStorage.setItem('nexus_user', data.username);
-            window.location.href = '/dashboard.html';
-        } catch {
-            errEl.textContent = 'Server unreachable. Make sure the backend is running.';
-            errEl.hidden = false;
+        let users = JSON.parse(localStorage.getItem('nexus_users') || '[]');
+        if (users.find(u => u.username.toLowerCase() === username.toLowerCase())) {
+            errEl.textContent = 'Username already taken.'; 
+            errEl.hidden = false; 
+            return; 
         }
+
+        const newUser = { id: Date.now().toString(), username, password };
+        users.push(newUser);
+        localStorage.setItem('nexus_users', JSON.stringify(users));
+
+        localStorage.setItem('nexus_token', 'token-' + newUser.id);
+        localStorage.setItem('nexus_user', newUser.username);
+        window.location.href = '/dashboard.html';
     });
 });

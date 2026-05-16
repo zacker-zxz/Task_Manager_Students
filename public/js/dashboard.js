@@ -43,36 +43,49 @@ document.addEventListener('DOMContentLoaded', () => {
         greetingText.textContent = `${g}, ${username || 'Student'}!`;
     }
 
-    // ── API Helpers ─────────────────────────────────────────────
-    function headers() {
-        return { 'Content-Type': 'application/json', 'Authorization': token };
+    // ── Local Storage Helpers ─────────────────────────────────────
+    function getUserId() {
+        return token ? token.replace('token-', '') : null;
     }
 
     async function fetchTasks() {
-        try {
-            const res = await fetch('/api/tasks', { headers: headers() });
-            if (res.status === 401) { logout(); return; }
-            tasks = await res.json();
-            render();
-        } catch {
-            taskListEl.innerHTML = '<div class="empty-state"><i class="ph ph-warning-circle"></i><p>Cannot connect to server.</p></div>';
-        }
+        const allTasks = JSON.parse(localStorage.getItem('nexus_tasks') || '[]');
+        const userId = getUserId();
+        tasks = allTasks.filter(t => t.userId === userId);
+        render();
     }
 
-    async function createTask(task) {
-        const res = await fetch('/api/tasks', { method: 'POST', headers: headers(), body: JSON.stringify(task) });
-        if (res.status === 401) { logout(); return; }
-        const newTask = await res.json();
+    async function createTask(taskData) {
+        const newTask = {
+            id: Date.now().toString(),
+            userId: getUserId(),
+            title: taskData.title,
+            category: taskData.category || 'personal',
+            deadline: taskData.deadline || '',
+            completed: false,
+            createdAt: new Date().toISOString()
+        };
+        const allTasks = JSON.parse(localStorage.getItem('nexus_tasks') || '[]');
+        allTasks.push(newTask);
+        localStorage.setItem('nexus_tasks', JSON.stringify(allTasks));
+        
         tasks.push(newTask);
         render();
     }
 
     async function toggleTask(id, completed) {
-        await fetch(`/api/tasks/${id}`, { method: 'PUT', headers: headers(), body: JSON.stringify({ completed }) });
+        const allTasks = JSON.parse(localStorage.getItem('nexus_tasks') || '[]');
+        const t = allTasks.find(t => t.id === id);
+        if (t) {
+            t.completed = completed;
+            localStorage.setItem('nexus_tasks', JSON.stringify(allTasks));
+        }
     }
 
     async function removeTask(id) {
-        await fetch(`/api/tasks/${id}`, { method: 'DELETE', headers: headers() });
+        let allTasks = JSON.parse(localStorage.getItem('nexus_tasks') || '[]');
+        allTasks = allTasks.filter(t => t.id !== id);
+        localStorage.setItem('nexus_tasks', JSON.stringify(allTasks));
     }
 
     // ── Render ──────────────────────────────────────────────────
