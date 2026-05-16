@@ -23,14 +23,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const logoutBtn = document.getElementById('logout-btn');
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const sidebar = document.getElementById('sidebar');
+    
+    // View & Settings Elements
+    const sidebarLinks = document.querySelectorAll('.sidebar-link[data-view]');
+    const viewSections = document.querySelectorAll('.view-section');
+    const settingsForm = document.getElementById('settings-form');
+    const settingsNameInput = document.getElementById('settings-name');
+    const inlineCalendar = document.getElementById('inline-calendar');
 
     let tasks = [];
     let currentFilter = 'all';
 
     // ── Init ────────────────────────────────────────────────────
     displayUser.textContent = username || 'Student';
-    taskDeadline.min = new Date().toISOString().split('T')[0];
-    taskDeadline.value = taskDeadline.min;
+    settingsNameInput.value = username || '';
+    
+    // Initialize Flatpickr
+    flatpickr(taskDeadline, {
+        minDate: "today",
+        defaultDate: "today",
+        dateFormat: "Y-m-d"
+    });
+    
     setGreeting();
     fetchTasks();
 
@@ -95,6 +109,23 @@ document.addEventListener('DOMContentLoaded', () => {
         statTotal.textContent = total;
         statDone.textContent = done;
         statPending.textContent = total - done;
+
+        // Render Calendar Deadlines
+        const deadlines = tasks.filter(t => !t.completed && t.deadline).map(t => t.deadline);
+        if (inlineCalendar) {
+            inlineCalendar.innerHTML = ''; // reset
+            flatpickr(inlineCalendar, {
+                inline: true,
+                events: deadlines.map(d => new Date(d)),
+                onDayCreate: function(dObj, dStr, fp, dayElem) {
+                    const dateStr = dayElem.dateObj.toISOString().split('T')[0];
+                    if (deadlines.includes(dateStr)) {
+                        dayElem.classList.add('has-deadline');
+                        dayElem.style.borderBottom = "2px solid var(--accent)";
+                    }
+                }
+            });
+        }
 
         let list = currentFilter === 'all' ? [...tasks] : tasks.filter(t => t.category === currentFilter);
         list.sort((a, b) => {
@@ -184,6 +215,41 @@ document.addEventListener('DOMContentLoaded', () => {
             render();
         });
     });
+
+    // ── View Switching ──────────────────────────────────────────
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            sidebarLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            
+            const targetView = link.dataset.view;
+            viewSections.forEach(sec => {
+                if(sec.id === targetView) {
+                    sec.style.display = 'block';
+                    if (targetView === 'view-calendar') render(); // re-render calendar layout if needed
+                } else {
+                    sec.style.display = 'none';
+                }
+            });
+            
+            if (window.innerWidth <= 900) {
+                sidebar.classList.remove('open');
+            }
+        });
+    });
+
+    // ── Settings ────────────────────────────────────────────────
+    if (settingsForm) {
+        settingsForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const newName = settingsNameInput.value.trim();
+            if (newName) {
+                localStorage.setItem('nexus_user', newName);
+                displayUser.textContent = newName;
+                greetingText.textContent = \`Settings saved, \${newName}!\`;
+            }
+        });
+    }
 
     function logout() {
         localStorage.removeItem('nexus_token');

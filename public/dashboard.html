@@ -6,7 +6,10 @@
     <title>Dashboard — NexusTask</title>
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
     <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 <body class="dashboard-page">
 
@@ -21,7 +24,10 @@
             <a href="/" class="logo sidebar-logo">Nexus<span>Task</span></a>
         </div>
         <nav class="sidebar-nav">
-            <a href="/dashboard.html" class="sidebar-link active"><i class="ph ph-squares-four"></i> Dashboard</a>
+            <button class="sidebar-link active" data-view="view-dashboard"><i class="ph ph-squares-four"></i> Dashboard</button>
+            <button class="sidebar-link" data-view="view-calendar"><i class="ph ph-calendar-blank"></i> Task Calendar</button>
+            <button class="sidebar-link" data-view="view-amizone"><i class="ph ph-student"></i> Amizone</button>
+            <button class="sidebar-link" data-view="view-settings"><i class="ph ph-gear"></i> Settings</button>
             <a href="/" class="sidebar-link"><i class="ph ph-house"></i> Home</a>
         </nav>
         <div class="sidebar-bottom">
@@ -46,8 +52,13 @@
             </button>
         </header>
 
-        <!-- Stats -->
-        <div class="stats-grid">
+        <!-- Views Container -->
+        <div id="views-container">
+            
+            <!-- Dashboard View -->
+            <div id="view-dashboard" class="view-section active">
+                <!-- Stats -->
+                <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-icon"><i class="ph ph-list-checks"></i></div>
                 <div>
@@ -108,9 +119,42 @@
                     <button class="filter-chip" data-filter="exam">Exams</button>
                     <button class="filter-chip" data-filter="personal">Personal</button>
                 </div>
-            </div>
-            <div id="task-list" class="task-list"></div>
-        </section>
+                </div>
+                <div id="task-list" class="task-list"></div>
+            </section>
+        </div>
+
+        <!-- Calendar View -->
+        <div id="view-calendar" class="view-section" style="display: none;">
+            <section class="card">
+                <h2><i class="ph ph-calendar-blank"></i> Task Calendar</h2>
+                <p class="text-muted" style="margin-bottom: 1rem;">View all your deadlines in one place.</p>
+                <div id="inline-calendar"></div>
+            </section>
+        </div>
+
+        <!-- Amizone View -->
+        <div id="view-amizone" class="view-section" style="display: none; height: calc(100vh - 120px);">
+            <iframe src="https://s.amizone.net/" style="width: 100%; height: 100%; border: none; border-radius: var(--radius); background: #fff;"></iframe>
+        </div>
+
+        <!-- Settings View -->
+        <div id="view-settings" class="view-section" style="display: none;">
+            <section class="card">
+                <h2><i class="ph ph-gear"></i> Settings</h2>
+                <form id="settings-form" style="max-width: 400px; margin-top: 1rem;">
+                    <div class="form-group">
+                        <label for="settings-name">Display Name</label>
+                        <input type="text" id="settings-name" required>
+                    </div>
+                    <div class="form-group" style="margin-top: 1rem;">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+
+        </div> <!-- End Views Container -->
     </main>
 
     <script src="/js/dashboard.js"></script>

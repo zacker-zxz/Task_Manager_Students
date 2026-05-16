@@ -15,6 +15,7 @@
     --radius-sm:  10px;
     --font:       'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --transition: 0.25s ease;
+    color-scheme: dark;
 }
 
 /* ─── Reset ──────────────────────────────────────────────────────── */
@@ -37,7 +38,7 @@ button { cursor: pointer; font-family: var(--font); }
 }
 
 /* ─── Container ──────────────────────────────────────────────────── */
-.container { width: 100%; max-width: 1140px; margin: 0 auto; padding: 0 1.5rem; }
+.container { width: 100%; max-width: 1600px; margin: 0 auto; padding: 0 4rem; }
 
 /* ─── Header ─────────────────────────────────────────────────────── */
 #site-header {
@@ -149,6 +150,7 @@ input[type="text"], input[type="password"], input[type="date"], select {
 }
 input:focus, select:focus { border-color: var(--accent); }
 input::placeholder { color: var(--text-muted); }
+select option { background: #0c0c14; color: var(--text); }
 
 /* ─── Dashboard Layout ───────────────────────────────────────────── */
 .dashboard-page { display: flex; min-height: 100vh; }
