@@ -2,10 +2,10 @@
   "name": "wp-mini-project",
   "version": "1.0.0",
   "description": "NexusTask - Student Task Management Web Application",
-  "main": "server.js",
+  "main": "public/index.html",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js",
+    "start": "npx serve public",
+    "dev": "npx serve public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": ["task-manager", "student", "productivity"],
