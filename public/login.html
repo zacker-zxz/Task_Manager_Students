@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login — NexusTask</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
+</head>
+<body class="auth-page">
+
+    <div class="bg-glow">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <div class="auth-wrapper">
+        <a href="/" class="logo auth-logo">Nexus<span>Task</span></a>
+
+        <!-- Login Form -->
+        <div id="login-box" class="auth-box">
+            <h2>Welcome Back</h2>
+            <p class="auth-sub">Sign in to your account</p>
+            <div id="login-error" class="error-msg" hidden></div>
+            <form id="login-form">
+                <label for="login-user">Username</label>
+                <input type="text" id="login-user" placeholder="Enter your username" required autocomplete="username">
+                <label for="login-pass">Password</label>
+                <input type="password" id="login-pass" placeholder="Enter your password" required autocomplete="current-password">
+                <button type="submit" class="btn btn-primary btn-full">Sign In</button>
+            </form>
+            <p class="auth-switch">Don't have an account? <a href="#" id="show-register">Create one</a></p>
+        </div>
+
+        <!-- Register Form -->
+        <div id="register-box" class="auth-box" hidden>
+            <h2>Create Account</h2>
+            <p class="auth-sub">Get started for free</p>
+            <div id="register-error" class="error-msg" hidden></div>
+            <form id="register-form">
+                <label for="reg-user">Username</label>
+                <input type="text" id="reg-user" placeholder="Choose a username" required minlength="3" autocomplete="username">
+                <label for="reg-pass">Password</label>
+                <input type="password" id="reg-pass" placeholder="Choose a password" required minlength="4" autocomplete="new-password">
+                <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+            </form>
+            <p class="auth-switch">Already have an account? <a href="#" id="show-login">Sign in</a></p>
+        </div>
+    </div>
+
+    <script src="/js/auth.js"></script>
+</body>
+</html>

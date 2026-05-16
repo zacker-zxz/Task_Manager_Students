@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — NexusTask</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
+</head>
+<body class="dashboard-page">
+
+    <div class="bg-glow">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside id="sidebar">
+        <div class="sidebar-top">
+            <a href="/" class="logo sidebar-logo">Nexus<span>Task</span></a>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="/dashboard.html" class="sidebar-link active"><i class="ph ph-squares-four"></i> Dashboard</a>
+            <a href="/" class="sidebar-link"><i class="ph ph-house"></i> Home</a>
+        </nav>
+        <div class="sidebar-bottom">
+            <div class="user-info">
+                <i class="ph ph-user-circle"></i>
+                <span id="display-username">Student</span>
+            </div>
+            <button id="logout-btn" class="sidebar-link logout-link"><i class="ph ph-sign-out"></i> Logout</button>
+        </div>
+    </aside>
+
+    <!-- Main Area -->
+    <main id="dash-main">
+        <!-- Top Bar -->
+        <header class="dash-header">
+            <div>
+                <h1>Dashboard</h1>
+                <p class="dash-greeting" id="greeting-text">Good morning!</p>
+            </div>
+            <button id="mobile-menu-btn" class="menu-toggle" aria-label="Toggle sidebar">
+                <i class="ph ph-list"></i>
+            </button>
+        </header>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="ph ph-list-checks"></i></div>
+                <div>
+                    <p class="stat-label">Total Tasks</p>
+                    <p class="stat-value" id="stat-total">0</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon accent"><i class="ph ph-check-circle"></i></div>
+                <div>
+                    <p class="stat-label">Completed</p>
+                    <p class="stat-value" id="stat-done">0</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon warn"><i class="ph ph-clock"></i></div>
+                <div>
+                    <p class="stat-label">Pending</p>
+                    <p class="stat-value" id="stat-pending">0</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Task -->
+        <section class="card add-task-card">
+            <h2><i class="ph ph-plus-circle"></i> New Task</h2>
+            <form id="task-form">
+                <div class="form-group">
+                    <input type="text" id="task-title" placeholder="What do you need to do?" required autocomplete="off">
+                </div>
+                <div class="form-row-3">
+                    <div class="form-group">
+                        <label for="task-category">Category</label>
+                        <select id="task-category">
+                            <option value="assignment">Assignment</option>
+                            <option value="exam">Exam</option>
+                            <option value="personal">Personal</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="task-deadline">Deadline</label>
+                        <input type="date" id="task-deadline" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-full">Add Task</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <!-- Task List -->
+        <section class="card task-list-card">
+            <div class="task-list-header">
+                <h2><i class="ph ph-kanban"></i> Your Tasks</h2>
+                <div class="filters" id="filter-bar">
+                    <button class="filter-chip active" data-filter="all">All</button>
+                    <button class="filter-chip" data-filter="assignment">Assignments</button>
+                    <button class="filter-chip" data-filter="exam">Exams</button>
+                    <button class="filter-chip" data-filter="personal">Personal</button>
+                </div>
+            </div>
+            <div id="task-list" class="task-list"></div>
+        </section>
+    </main>
+
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>

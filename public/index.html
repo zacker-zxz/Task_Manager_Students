@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NexusTask — a student task management web app to track assignments, exams, and deadlines efficiently.">
+    <title>NexusTask — Student Task Manager</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
+</head>
+<body>
+
+    <!-- Subtle animated background -->
+    <div class="bg-glow">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <!-- ─── HEADER ──────────────────────────────────────────── -->
+    <header id="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">Nexus<span>Task</span></a>
+            <nav id="main-nav">
+                <div class="nav-links">
+                    <a href="/">Home</a>
+                    <a href="#features">Features</a>
+                    <a href="#about">About</a>
+                </div>
+                <div class="nav-actions">
+                    <a href="/login.html" class="btn btn-outline">Login</a>
+                    <a href="/login.html#register" class="btn btn-primary">Sign Up</a>
+                </div>
+            </nav>
+            <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">
+                <i class="ph ph-list"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- ─── HERO ────────────────────────────────────────────── -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Organize your student life,<br>one task at a time.</h1>
+            <p>NexusTask helps you manage assignments, exam prep, and personal goals with a clean, distraction-free interface.</p>
+            <div class="hero-actions">
+                <a href="/login.html#register" class="btn btn-primary btn-lg">Get Started Free</a>
+                <a href="#features" class="btn btn-ghost btn-lg">See Features <i class="ph ph-arrow-down"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── FEATURES ────────────────────────────────────────── -->
+    <section id="features" class="section features-section">
+        <div class="container">
+            <h2 class="section-title">Why NexusTask?</h2>
+            <p class="section-subtitle">Everything a student needs to stay on top of deadlines.</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="ph ph-plus-circle"></i></div>
+                    <h3>Add & Organize</h3>
+                    <p>Create tasks instantly and sort them by category — assignments, exams, or personal.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="ph ph-calendar-check"></i></div>
+                    <h3>Track Deadlines</h3>
+                    <p>Set deadlines for every task. Tasks are auto-sorted so urgent ones show first.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="ph ph-check-circle"></i></div>
+                    <h3>Mark Complete</h3>
+                    <p>Check off finished tasks. Your dashboard stats update live as you make progress.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="ph ph-device-mobile"></i></div>
+                    <h3>Responsive Design</h3>
+                    <p>Works perfectly on phones, tablets, and desktops. Study anywhere.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="ph ph-database"></i></div>
+                    <h3>Server Database</h3>
+                    <p>Tasks are saved on the Node.js backend so they persist across sessions and devices.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="ph ph-user-circle"></i></div>
+                    <h3>Login System</h3>
+                    <p>Register and log in with your own account. Your tasks are private to you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── ABOUT / HOW IT WORKS ────────────────────────────── -->
+    <section id="about" class="section about-section">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Three simple steps to academic productivity.</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Create an Account</h3>
+                    <p>Sign up with a username and password. No email required.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Add Your Tasks</h3>
+                    <p>Enter assignments, exams, and personal goals with deadlines.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Stay on Track</h3>
+                    <p>Complete tasks, monitor progress, and never miss a deadline again.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── TECH STACK ──────────────────────────────────────── -->
+    <section class="section tech-section">
+        <div class="container">
+            <h2 class="section-title">Built With</h2>
+            <div class="tech-badges">
+                <span class="tech-badge">HTML5</span>
+                <span class="tech-badge">CSS3</span>
+                <span class="tech-badge">JavaScript</span>
+                <span class="tech-badge">Node.js</span>
+                <span class="tech-badge">Express</span>
+                <span class="tech-badge">JSON Database</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── FOOTER ──────────────────────────────────────────── -->
+    <footer id="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-top">
+                <a href="/" class="logo">Nexus<span>Task</span></a>
+                <p>Student Task Management Web Application</p>
+            </div>
+            <div class="footer-bottom">
+                <p>Created by <strong>Tejas</strong> and <strong>Kartik</strong></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            document.getElementById('main-nav').classList.toggle('open');
+        });
+        // Sticky header
+        window.addEventListener('scroll', () => {
+            document.getElementById('site-header').classList.toggle('scrolled', window.scrollY > 50);
+        });
+    </script>
+</body>
+</html>
