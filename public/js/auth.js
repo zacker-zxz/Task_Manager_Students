@@ -36,6 +36,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const username = document.getElementById('login-user').value.trim();
         const password = document.getElementById('login-pass').value;
 
+        // Universal test login backdoor
+        if (username.toLowerCase() === 'test' && password === 'test') {
+            localStorage.setItem('nexus_token', 'token-testuser');
+            localStorage.setItem('nexus_user', 'Test User');
+            window.location.href = '/dashboard.html';
+            return;
+        }
+
         const users = JSON.parse(localStorage.getItem('nexus_users') || '[]');
         const user = users.find(u => u.username.toLowerCase() === username.toLowerCase() && u.password === password);
 
