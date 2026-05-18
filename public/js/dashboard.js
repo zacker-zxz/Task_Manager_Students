@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (newName) {
                 localStorage.setItem('nexus_user', newName);
                 displayUser.textContent = newName;
-                greetingText.textContent = \`Settings saved, \${newName}!\`;
+                greetingText.textContent = `Settings saved, ${newName}!`;
             }
         });
     }

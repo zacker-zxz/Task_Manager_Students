@@ -26,9 +26,8 @@
         <nav class="sidebar-nav">
             <button class="sidebar-link active" data-view="view-dashboard"><i class="ph ph-squares-four"></i> Dashboard</button>
             <button class="sidebar-link" data-view="view-calendar"><i class="ph ph-calendar-blank"></i> Task Calendar</button>
-            <button class="sidebar-link" data-view="view-amizone"><i class="ph ph-student"></i> Amizone</button>
+            <a href="https://s.amizone.net/" target="_blank" class="sidebar-link"><i class="ph ph-student"></i> Amizone</a>
             <button class="sidebar-link" data-view="view-settings"><i class="ph ph-gear"></i> Settings</button>
-            <a href="/" class="sidebar-link"><i class="ph ph-house"></i> Home</a>
         </nav>
         <div class="sidebar-bottom">
             <div class="user-info">
@@ -131,11 +130,6 @@
                 <p class="text-muted" style="margin-bottom: 1rem;">View all your deadlines in one place.</p>
                 <div id="inline-calendar"></div>
             </section>
-        </div>
-
-        <!-- Amizone View -->
-        <div id="view-amizone" class="view-section" style="display: none; height: calc(100vh - 120px);">
-            <iframe src="https://s.amizone.net/" style="width: 100%; height: 100%; border: none; border-radius: var(--radius); background: #fff;"></iframe>
         </div>
 
         <!-- Settings View -->
